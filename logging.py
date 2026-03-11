@@ -20,32 +20,25 @@
 # Email: badboy809075@gmail.com
 
 
-from ShrutiMusic.core.bot import Nand
-from ShrutiMusic.core.dir import dirr
-from ShrutiMusic.core.git import git
-from ShrutiMusic.core.userbot import Userbot
-from ShrutiMusic.misc import dbb, heroku
+import logging
 
-from .logging import LOGGER
+logging.basicConfig(
+    level=logging.INFO,
+    format="[%(asctime)s - %(levelname)s] - %(name)s - %(message)s",
+    datefmt="%d-%b-%y %H:%M:%S",
+    handlers=[
+        logging.FileHandler("log.txt"),
+        logging.StreamHandler(),
+    ],
+)
 
-dirr()
-git()
-dbb()
-heroku()
-
-app = Nand()
-userbot = Userbot()
+logging.getLogger("httpx").setLevel(logging.ERROR)
+logging.getLogger("pyrogram").setLevel(logging.ERROR)
+logging.getLogger("pytgcalls").setLevel(logging.ERROR)
 
 
-from .platforms import *
-
-Apple = AppleAPI()
-Carbon = CarbonAPI()
-SoundCloud = SoundAPI()
-Spotify = SpotifyAPI()
-Resso = RessoAPI()
-Telegram = TeleAPI()
-YouTube = YouTubeAPI()
+def LOGGER(name: str) -> logging.Logger:
+    return logging.getLogger(name)
 
 
 # ©️ Copyright Reserved - @NoxxOP  Nand Yaduwanshi
